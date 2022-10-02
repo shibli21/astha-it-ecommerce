@@ -1,8 +1,12 @@
-import Link from "next/link";
-import { FC, useEffect, useState } from "react";
-import { Activity, Checklist, Menu2, ShoppingCart } from "tabler-icons-react";
-import SideNav from "./SideNav";
 import Image from "next/future/image";
+import Link from "next/link";
+
+import { FC, useEffect, useState } from "react";
+
+import { Checklist, Menu2, ShoppingCart } from "tabler-icons-react";
+
+import SideNav from "./SideNav";
+import Logo from "../public/logo-astha.svg";
 
 type Props = {};
 
@@ -20,9 +24,9 @@ export default function Navbar({}: Props) {
           <Link href="/">
             <Image
               width={100}
-              height={100}
+              height={26}
               className="max-w-full cursor-pointer h-auto"
-              src="/logo-astha.webp"
+              src="/logo-astha.svg"
               alt="asthait-logo"
             />
           </Link>
@@ -63,9 +67,9 @@ export default function Navbar({}: Props) {
           <Link href="/">
             <Image
               width={100}
-              height={100}
+              height={26}
               className="max-w-full h-auto mt-4 cursor-pointer"
-              src="/logo-astha.webp"
+              src="/logo-astha.svg"
               alt="asthait-logo"
             />
           </Link>
