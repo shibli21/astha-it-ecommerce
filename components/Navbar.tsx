@@ -22,6 +22,7 @@ export default function Navbar({}: Props) {
         <header className="flex items-center justify-between  py-4">
           <Link href="/">
             <Image
+              priority
               width={100}
               height={26}
               className="h-auto max-w-full cursor-pointer"
@@ -75,6 +76,7 @@ export default function Navbar({}: Props) {
         >
           <Link href="/">
             <Image
+              priority
               width={100}
               height={26}
               className="mt-4 h-auto max-w-full cursor-pointer"
