@@ -6,7 +6,6 @@ import { FC, useEffect, useState } from "react";
 import { Checklist, Menu2, ShoppingCart } from "tabler-icons-react";
 
 import SideNav from "./SideNav";
-import Logo from "../public/logo-astha.svg";
 
 type Props = {};
 
@@ -19,77 +18,95 @@ export default function Navbar({}: Props) {
 
   return (
     <>
-      <div>
-        <header className="flex justify-between items-center py-4 ">
+      <div className="sticky top-0 z-30 -mx-4 bg-white px-4">
+        <header className="flex items-center justify-between  py-4">
           <Link href="/">
             <Image
               width={100}
               height={26}
-              className="max-w-full cursor-pointer h-auto"
+              className="h-auto max-w-full cursor-pointer"
               src="/logo-astha.svg"
               alt="asthait-logo"
             />
           </Link>
 
-          <nav className="hidden md:flex gap-12">
+          <nav className="hidden gap-12 md:flex">
             <Link href="/" passHref>
-              <a className=" hover:text-purple-500 active:text-purple-700 text-lg transition duration-100 font-medium">
+              <a className=" text-lg font-medium transition duration-100 hover:text-purple-500 active:text-purple-700">
                 Our Products
               </a>
             </Link>
 
             <Link href="/" passHref>
-              <a className=" hover:text-purple-500 active:text-purple-700 text-lg transition duration-100 font-medium">
+              <a className=" text-lg font-medium transition duration-100 hover:text-purple-500 active:text-purple-700">
                 Contact
               </a>
             </Link>
 
             <Link href="/" passHref>
-              <a className=" hover:text-purple-500 active:text-purple-700 text-lg transition duration-100 font-medium">
+              <a className=" text-lg font-medium transition duration-100 hover:text-purple-500 active:text-purple-700">
                 About
               </a>
             </Link>
           </nav>
 
-          <div className="hidden md:flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-2.5 -ml-8">
+          <div className="-ml-8 hidden flex-col gap-2.5 sm:flex-row sm:justify-center md:flex lg:justify-start">
             <CartIcon carItemCount={69} />
             <Link href="/orders">
-              <Checklist className="m-2 cursor-pointer" strokeWidth={2} color={"black"} />
+              <Checklist
+                className="m-2 cursor-pointer"
+                strokeWidth={2}
+                color={"black"}
+              />
             </Link>
           </div>
-          <button onClick={() => setOpenNav(!openNav)} className="md:hidden focus:outline-none ">
+          <button
+            onClick={() => setOpenNav(!openNav)}
+            className="focus:outline-none md:hidden "
+          >
             <Menu2 strokeWidth={2} size={30} color={"black"} />
           </button>
         </header>
       </div>
-      <SideNav isOpen={openNav} setOpenNav={() => setOpenNav(false)}>
-        <div className="h-full bg-purple-700 space-y-6 px-2 flex items-center flex-col">
+      <SideNav isOpen={openNav} setOpenNav={() => setOpenNav(!openNav)}>
+        <div
+          className="s flex h-full flex-col items-center space-y-6 px-2"
+          onClick={() => setOpenNav(false)}
+        >
           <Link href="/">
             <Image
               width={100}
               height={26}
-              className="max-w-full h-auto mt-4 cursor-pointer"
+              className="mt-4 h-auto max-w-full cursor-pointer"
               src="/logo-astha.svg"
               alt="asthait-logo"
             />
           </Link>
           <Link href="/">
-            <a className=" hover:text-white active:text-white text-lg transition duration-100 font-medium">
+            <a className=" text-lg font-medium transition duration-100 hover:text-purple-600 active:text-purple-700">
               Our Products
             </a>
           </Link>
 
           <Link href="/">
-            <a className=" hover:text-white active:text-white text-lg transition duration-100 font-medium">Contact</a>
+            <a className=" text-lg font-medium transition duration-100 hover:text-purple-600 active:text-purple-700">
+              Contact
+            </a>
           </Link>
 
           <Link href="/">
-            <a className=" hover:text-white active:text-white text-lg transition duration-100 font-medium">About</a>
+            <a className=" text-lg font-medium transition duration-100 hover:text-purple-600 active:text-purple-700">
+              About
+            </a>
           </Link>
           <div className="flex gap-2">
             <CartIcon carItemCount={69} />
             <Link href="/orders">
-              <Checklist className="m-2 cursor-pointer" strokeWidth={2} color={"black"} />
+              <Checklist
+                className="m-2 cursor-pointer"
+                strokeWidth={2}
+                color={"black"}
+              />
             </Link>
           </div>
         </div>
@@ -105,10 +122,10 @@ interface CartIconProps {
 const CartIcon: FC<CartIconProps> = ({ carItemCount }) => {
   return (
     <Link href="/cart">
-      <div className="inline-flex relative items-center p-2 text-sm text-center cursor-pointer">
+      <div className="relative inline-flex cursor-pointer items-center p-2 text-center text-sm">
         <ShoppingCart strokeWidth={2} color="black" />
         {carItemCount > 0 && (
-          <div className="inline-flex absolute -top-2 -right-2 justify-center items-center w-6 h-6 text-xs font-bold text-white bg-purple-500 rounded-full border-2 border-white ">
+          <div className="absolute -top-2 -right-2 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-purple-500 text-xs font-bold text-white ">
             {carItemCount}
           </div>
         )}

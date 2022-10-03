@@ -26,12 +26,9 @@ const ProductCard: FC<ProductCardProps> = ({
 
   return (
     <>
-      <div className="border border-gray-900 ">
-        <div className="relative ">
-          <button
-            type="button"
-            className="absolute right-4 top-4  bg-gray-900 p-2 text-white "
-          >
+      <div className="border border-gray-900">
+        <div className="relative">
+          <button type="button" className="absolute right-4 top-4">
             <Eye onClick={openModal} />
           </button>
 
@@ -56,14 +53,14 @@ const ProductCard: FC<ProductCardProps> = ({
 
           <button
             type="button"
-            className=" block w-full  bg-gray-900 p-4 text-sm font-medium text-white"
+            className="block w-full bg-gray-900 px-4 py-2 text-sm font-bold text-white"
           >
             Add to Cart
           </button>
         </div>
       </div>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+        <Dialog as="div" className="relative z-40" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -113,16 +110,16 @@ const ProductCard: FC<ProductCardProps> = ({
                   <div className="mt-4 text-right">
                     <button
                       type="button"
-                      className="bg-red-500 px-4 py-2 text-sm font-medium text-white"
-                      onClick={closeModal}
-                    >
-                      close
-                    </button>
-                    <button
-                      type="button"
                       className=" bg-gray-900 px-4 py-2 text-sm font-medium text-white"
                     >
                       Add to Cart
+                    </button>
+                    <button
+                      type="button"
+                      className="bg-red-500 px-4 py-2 text-sm font-medium text-white"
+                      onClick={closeModal}
+                    >
+                      Close
                     </button>
                   </div>
                 </Dialog.Panel>
