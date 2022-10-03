@@ -1,16 +1,39 @@
-import type { NextPage } from "next";
-import { Fragment } from "react";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import ProductsList from "../components/ProductsList";
+import { fetchProducts } from "../lib/apis";
+import { Product } from "../types/Products";
 
-const Home: NextPage = () => {
+interface HomePageProps {
+  products: Product[];
+}
+
+const Home: InferGetStaticPropsType<typeof getStaticProps> = ({
+  products,
+}: HomePageProps) => {
   return (
-    <Fragment>
+    <div className="py-6">
       <h1 className="underline-gray-900 pb-4 text-2xl font-bold underline decoration-wavy">
         All Products
       </h1>
-      <ProductsList />
-    </Fragment>
+      <ProductsList products={products} />
+    </div>
   );
 };
 
 export default Home;
+
+export const getStaticProps: GetStaticProps = async () => {
+  const products = await fetchProducts();
+
+  if (!products) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      products,
+    },
+  };
+};

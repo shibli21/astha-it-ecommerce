@@ -1,5 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/future/image";
+import Link from "next/link";
 import { FC, Fragment, useState } from "react";
 import { Eye } from "tabler-icons-react";
 import { Product } from "../types/Products";
@@ -25,7 +26,7 @@ const ProductCard: FC<ProductCardProps> = ({
   }
 
   return (
-    <>
+    <div>
       <div className="border border-gray-900">
         <div className="relative">
           <button type="button" className="absolute right-4 top-4">
@@ -36,18 +37,28 @@ const ProductCard: FC<ProductCardProps> = ({
             New
           </strong>
           <div className="h-56 lg:h-72">
-            <Image
-              width={300}
-              height={300}
-              className="h-56 w-full object-cover lg:h-72 "
-              alt={title}
-              src={images[0]}
-            />
+            <Link
+              className="text-lg font-bold leading-4"
+              href={`/products/${encodeURIComponent(id)}`}
+            >
+              <Image
+                width={300}
+                height={300}
+                className="h-56 w-full object-cover lg:h-72 "
+                alt={title}
+                src={images[0]}
+              />
+            </Link>
           </div>
         </div>
 
         <div className="max-h-full space-y-2 p-6">
-          <h5 className=" text-lg font-bold leading-4">{title}</h5>
+          <Link
+            href={`/products/${encodeURIComponent(id)}`}
+            className=" text-lg font-bold leading-4"
+          >
+            {title}
+          </Link>
 
           <p className=" text-sm text-gray-700">${price}</p>
 
@@ -128,7 +139,7 @@ const ProductCard: FC<ProductCardProps> = ({
           </div>
         </Dialog>
       </Transition>
-    </>
+    </div>
   );
 };
 
