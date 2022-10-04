@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 
 import { Checklist, Menu2, ShoppingCart } from "tabler-icons-react";
+import useShop from "../context/ShopContext";
 
 import SideNav from "./SideNav";
 
@@ -52,7 +53,7 @@ export default function Navbar({}: Props) {
           </nav>
 
           <div className="-ml-8 hidden flex-col gap-2.5 sm:flex-row sm:justify-center md:flex lg:justify-start">
-            <CartIcon carItemCount={69} />
+            <CartIcon />
             <Link href="/orders">
               <Checklist
                 className="m-2 cursor-pointer"
@@ -102,7 +103,7 @@ export default function Navbar({}: Props) {
             </a>
           </Link>
           <div className="flex gap-2">
-            <CartIcon carItemCount={69} />
+            <CartIcon />
             <Link href="/orders">
               <Checklist
                 className="m-2 cursor-pointer"
@@ -117,18 +118,15 @@ export default function Navbar({}: Props) {
   );
 }
 
-interface CartIconProps {
-  carItemCount: number;
-}
-
-const CartIcon: FC<CartIconProps> = ({ carItemCount }) => {
+const CartIcon: FC = () => {
+  const { totalCartQuantity } = useShop();
   return (
     <Link href="/cart">
       <div className="relative inline-flex cursor-pointer items-center p-2 text-center text-sm">
         <ShoppingCart strokeWidth={2} color="black" />
-        {carItemCount > 0 && (
+        {totalCartQuantity > 0 && (
           <div className="absolute -top-2 -right-2 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-purple-500 text-xs font-bold text-white ">
-            {carItemCount}
+            {totalCartQuantity}
           </div>
         )}
       </div>

@@ -1,4 +1,4 @@
-import { GetStaticProps, InferGetStaticPropsType } from "next";
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Image from "next/future/image";
 import { ParsedUrlQuery } from "querystring";
 import { Star, TruckDelivery } from "tabler-icons-react";
@@ -125,7 +125,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const products = await fetchProducts();
 
   const paths = products.map((product) => ({

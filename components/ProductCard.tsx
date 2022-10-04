@@ -3,6 +3,7 @@ import Image from "next/future/image";
 import Link from "next/link";
 import { FC, Fragment, useState } from "react";
 import { Eye } from "tabler-icons-react";
+import useShop from "../context/ShopContext";
 import { Product } from "../types/Products";
 
 interface ProductCardProps extends Product {}
@@ -16,6 +17,7 @@ const ProductCard: FC<ProductCardProps> = ({
   category,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { addToCart } = useShop();
 
   function closeModal() {
     setIsOpen(false);
@@ -63,6 +65,16 @@ const ProductCard: FC<ProductCardProps> = ({
           <p className=" text-sm text-gray-700">${price}</p>
 
           <button
+            onClick={() =>
+              addToCart({
+                id,
+                images,
+                title,
+                price,
+                description,
+                category,
+              })
+            }
             type="button"
             className="block w-full bg-gray-900 px-4 py-2 text-sm font-bold text-white"
           >
