@@ -1,8 +1,7 @@
 import { NextPage } from "next";
-import Image from "next/future/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Check, Minus, Plus, ShoppingCartX, Trash } from "tabler-icons-react";
+import { Minus, Plus, ShoppingCartX, Trash } from "tabler-icons-react";
 import useShop from "../../context/ShopContext";
 
 const CartPage: NextPage = () => {
@@ -21,11 +20,11 @@ const CartPage: NextPage = () => {
       {cartItems.length > 0 ? (
         <>
           <div className=" border border-gray-200 bg-white">
-            <header className="border-b border-gray-100 px-5 py-4">
+            <div className="border-b border-gray-100 px-5 py-4">
               <div className="font-semibold text-gray-800 ">
                 Manage Your Cart
               </div>
-            </header>
+            </div>
 
             <div className="overflow-x-auto p-3">
               <table className="w-full table-auto">

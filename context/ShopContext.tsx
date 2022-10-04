@@ -8,6 +8,8 @@ import {
 import shopReducer, {
   CartItemProduct,
   initialState,
+  IOrder,
+  IUser,
   ShopActionTypes,
 } from "../reducer/shopReducer";
 import { Product } from "../types/Products";
@@ -16,20 +18,24 @@ interface IShopContext {
   totalCost: number;
   totalCartQuantity: number;
   cartItems: CartItemProduct[];
+  orders: IOrder[];
   addToCart: (product: Product) => void;
   removeFromCart: (product: Product) => void;
   increaseQuantity: (product: Product) => void;
   decreaseQuantity: (product: Product) => void;
+  checkout: (user: IUser) => void;
 }
 
 const ShopContext = createContext<IShopContext>({
   totalCost: initialState.totalCost,
   totalCartQuantity: initialState.totalCartQuantity,
   cartItems: initialState.cartItems,
+  orders: initialState.orders,
   addToCart: () => {},
   removeFromCart: () => {},
   increaseQuantity: () => {},
   decreaseQuantity: () => {},
+  checkout: () => {},
 });
 
 export const ShopProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -131,14 +137,25 @@ export const ShopProvider: FC<PropsWithChildren> = ({ children }) => {
     updatePrice(state.cartItems);
   };
 
+  const checkout = (user: IUser) => {
+    dispatch({
+      type: ShopActionTypes.CHECKOUT,
+      payload: {
+        user,
+      },
+    });
+  };
+
   const value: IShopContext = {
     totalCost: state.totalCost,
     totalCartQuantity: state.totalCartQuantity,
     cartItems: state.cartItems,
+    orders: state.orders,
     addToCart,
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
+    checkout,
   };
 
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
