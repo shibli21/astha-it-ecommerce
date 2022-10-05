@@ -5,6 +5,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useReducer,
 } from "react";
 import shopReducer, {
@@ -59,6 +60,21 @@ export const ShopProvider: FC<PropsWithChildren> = ({ children }) => {
       updateCartItems(JSON.parse(cartItems));
     }
   }, [updateCartItems]);
+
+  useEffect(() => {
+    const onReceiveMessage = (e: StorageEvent) => {
+      const { key, newValue } = e;
+      if (key === "cartItems") {
+        if (newValue) {
+          updateCartItems(JSON.parse(newValue));
+        }
+      }
+    };
+    window.addEventListener("storage", onReceiveMessage);
+    return () => {
+      window.removeEventListener("storage", onReceiveMessage);
+    };
+  }, []);
 
   const addToCart = (product: Product) => {
     const tempProduct = { ...product, quantity: 1 };
@@ -135,6 +151,7 @@ export const ShopProvider: FC<PropsWithChildren> = ({ children }) => {
         user,
       },
     });
+    updateCartItems([]);
   };
 
   const value: IShopContext = {
