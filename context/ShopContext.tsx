@@ -62,7 +62,7 @@ export const ShopProvider: FC<PropsWithChildren> = ({ children }) => {
   }, [updateCartItems]);
 
   useEffect(() => {
-    const onReceiveMessage = (e: StorageEvent) => {
+    const onCartItemChange = (e: StorageEvent) => {
       const { key, newValue } = e;
       if (key === "cartItems") {
         if (newValue) {
@@ -70,11 +70,11 @@ export const ShopProvider: FC<PropsWithChildren> = ({ children }) => {
         }
       }
     };
-    window.addEventListener("storage", onReceiveMessage);
+    window.addEventListener("storage", onCartItemChange);
     return () => {
-      window.removeEventListener("storage", onReceiveMessage);
+      window.removeEventListener("storage", onCartItemChange);
     };
-  }, []);
+  }, [updateCartItems]);
 
   const addToCart = (product: Product) => {
     const tempProduct = { ...product, quantity: 1 };
