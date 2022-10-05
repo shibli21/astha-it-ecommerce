@@ -1,7 +1,12 @@
 import { Product } from "../types/Products";
 
+const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://astha-it-ecommerce.vercel.app/"
+    : "http://192.168.1.100:3000/";
+
 export const fetchProduct = async (id: string) => {
-  const res = await fetch(`https://api.escuelajs.co/api/v1/products/${id}`);
+  const res = await fetch(BASE_URL + `api/products/${id}`);
 
   const product: Product = await res.json();
 
@@ -9,9 +14,7 @@ export const fetchProduct = async (id: string) => {
 };
 
 export const fetchProducts = async () => {
-  const res = await fetch(
-    "https://api.escuelajs.co/api/v1/products?offset=40&limit=12"
-  );
+  const res = await fetch(BASE_URL + "api/products");
 
   const products: Product[] = await res.json();
 

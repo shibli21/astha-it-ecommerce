@@ -1,7 +1,8 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Image from "next/future/image";
 import { ParsedUrlQuery } from "querystring";
-import { Star, TruckDelivery } from "tabler-icons-react";
+import { Check, Star, TruckDelivery } from "tabler-icons-react";
+import useShop from "../../context/ShopContext";
 import { fetchProduct, fetchProducts } from "../../lib/apis";
 import { Product } from "../../types/Products";
 
@@ -12,6 +13,8 @@ interface ProductPageProps {
 const ProductPage: InferGetStaticPropsType<typeof getStaticProps> = ({
   product,
 }: ProductPageProps) => {
+  const { addToCart } = useShop();
+
   return (
     <div>
       <div className="bg-white py-6 sm:py-8 lg:py-12">
@@ -58,6 +61,7 @@ const ProductPage: InferGetStaticPropsType<typeof getStaticProps> = ({
                   {product.title}
                 </h2>
               </div>
+
               <div className="">
                 <div className="mb-3 text-lg font-semibold text-gray-800">
                   Description
@@ -73,8 +77,23 @@ const ProductPage: InferGetStaticPropsType<typeof getStaticProps> = ({
                   <Star className="fill-yellow-400 text-yellow-400" size={20} />
                 </div>
               </div>
+              <div>
+                {product.stock > 0 ? (
+                  <div className="flex items-center space-x-2">
+                    <Check className="text-green-500" />
+                    <h1>Stock - {product.stock}</h1>
+                  </div>
+                ) : (
+                  <div className="flex items-center space-x-2">
+                    <h1 className="text-red-500 ">
+                      <span className="mr-2">X</span>
+                      Stock out
+                    </h1>
+                  </div>
+                )}
+              </div>
 
-              <div className="mb-4">
+              <div className="my-4">
                 <h1 className="text-xl  font-bold text-gray-800 md:text-2xl">
                   ${product.price}
                   <span className="ml-2 text-sm font-normal text-gray-500">
@@ -90,6 +109,7 @@ const ProductPage: InferGetStaticPropsType<typeof getStaticProps> = ({
               <button
                 type="button"
                 className="block  bg-gray-900 px-4 py-2 text-sm font-bold text-white"
+                onClick={() => addToCart(product)}
               >
                 Add to Cart
               </button>

@@ -5,9 +5,9 @@ import {
   useCallback,
   useContext,
   useEffect,
-  useLayoutEffect,
   useReducer,
 } from "react";
+import { toast } from "react-toastify";
 import shopReducer, {
   CartItemProduct,
   initialState,
@@ -84,9 +84,20 @@ export const ShopProvider: FC<PropsWithChildren> = ({ children }) => {
     );
 
     if (itemIndex === -1) {
-      state.cartItems.push(tempProduct);
+      if (product.stock > 0) {
+        state.cartItems.push(tempProduct);
+      } else {
+        toast("Out of stock", { type: "error" });
+        return;
+      }
     } else {
-      state.cartItems[itemIndex].quantity += 1;
+      if (state.cartItems[itemIndex].quantity === product.stock) {
+        toast("Out of stock", { type: "error" });
+
+        return;
+      } else {
+        state.cartItems[itemIndex].quantity += 1;
+      }
     }
 
     updateCartItems(state.cartItems);
@@ -126,7 +137,12 @@ export const ShopProvider: FC<PropsWithChildren> = ({ children }) => {
     );
 
     if (itemIndex !== -1) {
-      state.cartItems[itemIndex].quantity += 1;
+      if (state.cartItems[itemIndex].quantity === product.stock) {
+        toast("Out of stock", { type: "error" });
+        return;
+      } else {
+        state.cartItems[itemIndex].quantity += 1;
+      }
     }
 
     updateCartItems(state.cartItems);

@@ -2,20 +2,16 @@ import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/future/image";
 import Link from "next/link";
 import { FC, Fragment, useState } from "react";
-import { Eye } from "tabler-icons-react";
+import { Check, Eye } from "tabler-icons-react";
 import useShop from "../context/ShopContext";
 import { Product } from "../types/Products";
 
-interface ProductCardProps extends Product {}
+interface ProductCardProps {
+  product: Product;
+}
 
-const ProductCard: FC<ProductCardProps> = ({
-  id,
-  images,
-  title,
-  price,
-  description,
-  category,
-}) => {
+const ProductCard: FC<ProductCardProps> = ({ product }) => {
+  const { category, description, id, images, price, stock, title } = product;
   const [isOpen, setIsOpen] = useState(false);
   const { addToCart } = useShop();
 
@@ -62,19 +58,27 @@ const ProductCard: FC<ProductCardProps> = ({
             {title}
           </Link>
 
-          <p className=" text-sm text-gray-700">${price}</p>
+          <div className="flex justify-between text-sm">
+            <p className=" text-gray-700">${price}</p>
+            <div>
+              {stock > 0 ? (
+                <div className="flex items-center space-x-2">
+                  <Check className="text-green-500" />
+                  <h1>Stock - {stock}</h1>
+                </div>
+              ) : (
+                <div className="flex items-center space-x-2">
+                  <h1 className="text-red-500 ">
+                    <span className="mr-2">X</span>
+                    Stock out
+                  </h1>
+                </div>
+              )}
+            </div>
+          </div>
 
           <button
-            onClick={() =>
-              addToCart({
-                id,
-                images,
-                title,
-                price,
-                description,
-                category,
-              })
-            }
+            onClick={() => addToCart(product)}
             type="button"
             className="block w-full bg-gray-900 px-4 py-2 text-sm font-bold text-white"
           >
@@ -134,6 +138,7 @@ const ProductCard: FC<ProductCardProps> = ({
                     <button
                       type="button"
                       className=" bg-gray-900 px-4 py-2 text-sm font-medium text-white"
+                      onClick={() => addToCart(product)}
                     >
                       Add to Cart
                     </button>

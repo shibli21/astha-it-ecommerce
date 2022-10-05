@@ -10,7 +10,7 @@ const ProductsList: FC<ProductsListProps> = ({ products }) => {
   return (
     <div className="grid gap-x-4 gap-y-8 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-4">
       {products?.map((product) => (
-        <ProductCard key={product.id} {...product} />
+        <ProductCard key={product.id} product={product} />
       ))}
     </div>
   );
