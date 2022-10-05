@@ -2,7 +2,9 @@ import {
   createContext,
   FC,
   PropsWithChildren,
+  useCallback,
   useContext,
+  useEffect,
   useReducer,
 } from "react";
 import shopReducer, {
@@ -41,6 +43,23 @@ const ShopContext = createContext<IShopContext>({
 export const ShopProvider: FC<PropsWithChildren> = ({ children }) => {
   const [state, dispatch] = useReducer(shopReducer, initialState);
 
+  const updateCartItems = useCallback((cartItems: CartItemProduct[]) => {
+    dispatch({
+      type: ShopActionTypes.ADD_TO_CART,
+      payload: {
+        cartItems,
+      },
+    });
+    updatePrice(cartItems);
+  }, []);
+
+  useEffect(() => {
+    const cartItems = localStorage.getItem("cartItems");
+    if (cartItems) {
+      updateCartItems(JSON.parse(cartItems));
+    }
+  }, [updateCartItems]);
+
   const addToCart = (product: Product) => {
     const tempProduct = { ...product, quantity: 1 };
 
@@ -54,14 +73,7 @@ export const ShopProvider: FC<PropsWithChildren> = ({ children }) => {
       state.cartItems[itemIndex].quantity += 1;
     }
 
-    updatePrice(state.cartItems);
-
-    dispatch({
-      type: ShopActionTypes.ADD_TO_CART,
-      payload: {
-        cartItems: state.cartItems,
-      },
-    });
+    updateCartItems(state.cartItems);
   };
 
   const removeFromCart = (product: Product) => {
@@ -69,14 +81,7 @@ export const ShopProvider: FC<PropsWithChildren> = ({ children }) => {
       (item: Product) => item.id !== product.id
     );
 
-    updatePrice(updatedCart);
-
-    dispatch({
-      type: ShopActionTypes.REMOVE_FROM_CART,
-      payload: {
-        cartItems: updatedCart,
-      },
-    });
+    updateCartItems(updatedCart);
   };
 
   const updatePrice = (products: CartItemProduct[]) => {
@@ -108,14 +113,7 @@ export const ShopProvider: FC<PropsWithChildren> = ({ children }) => {
       state.cartItems[itemIndex].quantity += 1;
     }
 
-    dispatch({
-      type: ShopActionTypes.ADD_TO_CART,
-      payload: {
-        cartItems: state.cartItems,
-      },
-    });
-
-    updatePrice(state.cartItems);
+    updateCartItems(state.cartItems);
   };
 
   const decreaseQuantity = (product: Product) => {
@@ -127,14 +125,7 @@ export const ShopProvider: FC<PropsWithChildren> = ({ children }) => {
       state.cartItems[itemIndex].quantity -= 1;
     }
 
-    dispatch({
-      type: ShopActionTypes.ADD_TO_CART,
-      payload: {
-        cartItems: state.cartItems,
-      },
-    });
-
-    updatePrice(state.cartItems);
+    updateCartItems(state.cartItems);
   };
 
   const checkout = (user: IUser) => {

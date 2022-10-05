@@ -77,30 +77,26 @@ const shopReducer = (state: IShopInitialState, action: ShopActions) => {
 
   switch (type) {
     case ShopActionTypes.ADD_TO_CART:
-      console.log("ADD_TO_CART", payload);
+      localStorage.setItem("cartItems", JSON.stringify(payload.cartItems));
 
       return {
         ...state,
         cartItems: payload.cartItems,
       };
     case ShopActionTypes.REMOVE_FROM_CART:
-      console.log("REMOVE_FROM_CART", payload);
+      localStorage.setItem("cartItems", JSON.stringify(payload.cartItems));
 
       return {
         ...state,
         cartItems: payload.cartItems,
       };
     case ShopActionTypes.UPDATE_PRICE:
-      console.log("UPDATE_PRICE", payload);
-
       return {
         ...state,
         totalCost: payload.totalCost,
         totalCartQuantity: payload.cartItemQuantity,
       };
     case ShopActionTypes.CHECKOUT:
-      console.log("CHECKOUT", payload);
-
       const newOrders = [
         ...state.orders,
         {
@@ -112,6 +108,8 @@ const shopReducer = (state: IShopInitialState, action: ShopActions) => {
           deliveryDate: new Date(),
         },
       ];
+
+      localStorage.removeItem("cartItems");
 
       return {
         ...state,
