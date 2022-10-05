@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import CheckoutForm from "../components/CheckoutForm";
 import useShop from "../context/ShopContext";
@@ -9,6 +10,9 @@ const Checkout: NextPage = () => {
 
   return (
     <div>
+      <Head>
+        <title>Checkout</title>
+      </Head>
       {cartItems.length > 0 ? (
         <section>
           <div className="mx-auto my-6 max-w-screen-2xl">

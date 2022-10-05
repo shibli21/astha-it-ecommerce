@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
 import Image from "next/future/image";
+import Head from "next/head";
 import { ParsedUrlQuery } from "querystring";
 import { Check, Star, TruckDelivery } from "tabler-icons-react";
 import useShop from "../../context/ShopContext";
@@ -17,6 +18,10 @@ const ProductPage: InferGetStaticPropsType<typeof getStaticProps> = ({
 
   return (
     <div>
+      <Head>
+        <title>{product.title} </title>
+        <meta content={product.description} name="description" />
+      </Head>
       <div className="bg-white py-6 sm:py-8 lg:py-12">
         <div className="mx-auto max-w-screen-lg ">
           <div className="grid gap-8 md:grid-cols-2">

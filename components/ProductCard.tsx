@@ -42,7 +42,7 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
               <Image
                 width={300}
                 height={300}
-                className="h-56 w-full object-cover lg:h-72 "
+                className="h-56 w-full cursor-pointer object-cover lg:h-72 "
                 alt={title}
                 src={images[0]}
               />

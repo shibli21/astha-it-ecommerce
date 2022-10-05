@@ -1,4 +1,5 @@
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
+import Head from "next/head";
 import ProductsList from "../components/ProductsList";
 import { fetchProducts } from "../lib/apis";
 import { Product } from "../types/Products";
@@ -11,12 +12,17 @@ const Home: InferGetStaticPropsType<typeof getStaticProps> = ({
   products,
 }: HomePageProps) => {
   return (
-    <div className="py-6">
-      <h1 className="underline-gray-900 pb-4 text-2xl font-bold underline decoration-wavy">
-        All Products
-      </h1>
-      <ProductsList products={products} />
-    </div>
+    <>
+      <Head>
+        <title>Astha Commerce</title>
+      </Head>
+      <div className="py-6">
+        <h1 className="underline-gray-900 pb-4 text-2xl font-bold underline decoration-wavy">
+          All Products
+        </h1>
+        <ProductsList products={products} />
+      </div>
+    </>
   );
 };
 
