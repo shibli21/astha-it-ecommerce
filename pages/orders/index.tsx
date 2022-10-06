@@ -13,9 +13,9 @@ const OrderPage: NextPage = () => {
       <Head>
         <title>Order history</title>
       </Head>
-      <div className="mx-auto max-w-screen-sm space-y-4">
+      <div className="mx-auto my-6 max-w-screen-sm space-y-4">
         {orders.length > 0 ? (
-          <div className="border border-gray-200">
+          <div className="rounded border border-gray-200">
             <div className="border-b border-gray-100 px-5 py-4">
               <h1 className="font-semibold text-gray-800">Order History</h1>
             </div>
@@ -63,8 +63,8 @@ const OrderPage: NextPage = () => {
                       <td className="p-2 text-gray-500">
                         <h1>${item.totalCost.toFixed(2)}</h1>
                       </td>
-                      <td className="rounded p-2">
-                        <div className="bg-emerald-500 p-0.5 text-center text-xs font-semibold uppercase text-white shadow-md">
+                      <td className=" p-2">
+                        <div className="rounded bg-emerald-500 p-0.5 text-center text-xs font-semibold uppercase text-white ">
                           Paid
                         </div>
                       </td>

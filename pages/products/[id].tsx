@@ -111,7 +111,7 @@ const ProductPage: NextPage<ProductPageProps> = ({ product }) => {
               </div>
               <button
                 type="button"
-                className="block  bg-gray-900 px-4 py-2 text-sm font-bold text-white"
+                className="btn"
                 onClick={() => addToCart(product)}
               >
                 Add to Cart

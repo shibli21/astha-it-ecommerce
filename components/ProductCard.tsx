@@ -25,10 +25,10 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
 
   return (
     <>
-      <div className="h-full border border-gray-900">
+      <div className="h-full overflow-hidden rounded border border-gray-900">
         <div className="relative">
           <button type="button" className="absolute right-4 top-4">
-            <Eye onClick={openModal} />
+            <Eye onClick={openModal} className="hover:text-purple-700" />
           </button>
 
           <strong className="absolute left-4 top-4 inline-block  bg-gray-900 px-3 py-1 text-xs font-bold text-white">
@@ -55,7 +55,7 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
 
         <div className="max-h-full space-y-2 p-6">
           <Link href={`/products/${encodeURIComponent(id)}`}>
-            <p className="cursor-pointer pb-2 text-lg font-medium leading-4 hover:text-purple-700 ">
+            <p className="cursor-pointer pb-2 text-lg font-medium leading-4 transition hover:text-purple-700 ">
               {title}
             </p>
           </Link>
@@ -136,17 +136,17 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
                     <p>{description}</p>
                   </div>
 
-                  <div className="mt-4 text-right">
+                  <div className="mt-4 space-x-2 text-right">
                     <button
                       type="button"
-                      className=" bg-gray-900 px-4 py-2 text-sm font-medium text-white"
+                      className="btn"
                       onClick={() => addToCart(product)}
                     >
                       Add to Cart
                     </button>
                     <button
                       type="button"
-                      className="bg-red-500 px-4 py-2 text-sm font-medium text-white"
+                      className="rounded bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600 active:bg-red-600"
                       onClick={closeModal}
                     >
                       Close

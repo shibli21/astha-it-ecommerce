@@ -24,16 +24,14 @@ const CartPage: NextPage = () => {
       <div className="mx-auto max-w-2xl py-6">
         {cartItems.length > 0 ? (
           <>
-            <div className=" border border-gray-200 bg-white">
+            <div className="rounded-t border border-gray-200 bg-white">
               <div className="border-b border-gray-100 px-5 py-4">
-                <div className="font-semibold text-gray-800 ">
-                  Manage Your Cart
-                </div>
+                <div className="font-semibold ">Manage Your Cart</div>
               </div>
 
               <div className="overflow-x-auto p-3">
                 <table className="w-full table-auto">
-                  <thead className=" text-xs font-semibold uppercase text-gray-400">
+                  <thead className="text-xs font-semibold uppercase text-gray-400">
                     <tr>
                       <th className="p-2">
                         <div className="text-left font-semibold">
@@ -56,11 +54,13 @@ const CartPage: NextPage = () => {
                     {cartItems.map((item) => (
                       <tr key={item.id}>
                         <td className="p-2">
-                          <div className="font-medium text-gray-800">
+                          <div className="font-medium ">
                             <Link
                               href={`/products/${encodeURIComponent(item.id)}`}
                             >
-                              {item.title}
+                              <p className="cursor-pointer hover:text-purple-700">
+                                {item.title}
+                              </p>
                             </Link>
                           </div>
                         </td>
@@ -70,11 +70,11 @@ const CartPage: NextPage = () => {
                               onClick={() => decreaseQuantity(item)}
                               disabled={item.quantity === 1}
                             >
-                              <Minus />
+                              <Minus className="hover:text-red-500" />
                             </button>
                             <h1>{item.quantity}</h1>
                             <button onClick={() => increaseQuantity(item)}>
-                              <Plus />
+                              <Plus className="hover:text-green-500" />
                             </button>
                           </div>
                         </td>
@@ -97,7 +97,7 @@ const CartPage: NextPage = () => {
               </div>
             </div>
             <div className="flex flex-col items-end gap-4 ">
-              <div className="w-full border border-gray-200  p-4 ">
+              <div className="w-full rounded-b border border-gray-200  p-4 ">
                 <div className="space-y-1">
                   <div className="flex justify-between gap-4 text-gray-500">
                     <span>Subtotal</span>
@@ -111,7 +111,7 @@ const CartPage: NextPage = () => {
                 </div>
 
                 <div className="mt-4 border-t pt-4">
-                  <div className="flex items-start justify-between gap-4 text-gray-800">
+                  <div className="flex items-start justify-between gap-4 ">
                     <span className="text-lg font-bold">Total</span>
 
                     <span className="flex flex-col items-end">
@@ -128,7 +128,7 @@ const CartPage: NextPage = () => {
 
               <button
                 type="button"
-                className="bg-gray-900 px-4 py-2 text-sm font-medium text-white"
+                className="btn"
                 onClick={() => router.push("/checkout")}
               >
                 Check out
@@ -139,9 +139,7 @@ const CartPage: NextPage = () => {
           <div>
             <div className="flex flex-col items-center justify-center gap-2 py-6 text-xl">
               <ShoppingCartX size={48} />
-              <h1 className="text-center font-medium text-gray-800">
-                Your cart is empty
-              </h1>
+              <h1 className="text-center font-medium ">Your cart is empty</h1>
             </div>
           </div>
         )}
