@@ -15,7 +15,7 @@ const Checkout: NextPage = () => {
       </Head>
       {cartItems.length > 0 ? (
         <section>
-          <div className="mx-auto my-6 max-w-screen-2xl">
+          <div className="mx-auto my-6 max-w-screen-lg md:my-10">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-10">
               <div className="">
                 <div className="mx-auto max-w-lg lg:px-8">
@@ -29,8 +29,8 @@ const Checkout: NextPage = () => {
                     </p>
                   </div>
 
-                  <div className="my-4">
-                    <ul className="divide-y divide-gray-200">
+                  <div className="my-4 ">
+                    <ul className="divide-y divide-gray-900 last:border-b last:border-gray-900">
                       {cartItems.map((item) => (
                         <li
                           key={item.id}
