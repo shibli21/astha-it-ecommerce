@@ -4,7 +4,7 @@ import Head from "next/head";
 import { ParsedUrlQuery } from "querystring";
 import { Check, Star, TruckDelivery } from "tabler-icons-react";
 import useShop from "../../context/ShopContext";
-import { fetchProduct, fetchProducts } from "../../lib/apis";
+import { productsData } from "../../data/productsData";
 import { Product } from "../../types/Products";
 
 interface ProductPageProps {
@@ -135,9 +135,9 @@ interface IParams extends ParsedUrlQuery {
 export const getStaticProps: GetStaticProps = async (context) => {
   const { id } = context.params as IParams;
 
-  const product = await fetchProduct(id);
+  const product = productsData.find((product) => product.id === Number(id));
 
-  if (!product.id) {
+  if (!product) {
     return {
       notFound: true,
     };
@@ -151,7 +151,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const products = await fetchProducts();
+  const products = productsData;
 
   const paths = products.map((product) => ({
     params: { id: product.id.toString() },

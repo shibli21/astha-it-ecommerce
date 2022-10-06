@@ -1,7 +1,7 @@
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import ProductsList from "../components/ProductsList";
-import { fetchProducts } from "../lib/apis";
+import { productsData } from "../data/productsData";
 import { Product } from "../types/Products";
 
 interface HomePageProps {
@@ -29,13 +29,7 @@ const Home: InferGetStaticPropsType<typeof getStaticProps> = ({
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const products = await fetchProducts();
-
-  if (!products) {
-    return {
-      notFound: true,
-    };
-  }
+  const products = productsData;
 
   return {
     props: {
