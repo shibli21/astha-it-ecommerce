@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from "next";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Image from "next/future/image";
 import Head from "next/head";
 import { ParsedUrlQuery } from "querystring";
@@ -11,9 +11,7 @@ interface ProductPageProps {
   product: Product;
 }
 
-const ProductPage: InferGetStaticPropsType<typeof getStaticProps> = ({
-  product,
-}: ProductPageProps) => {
+const ProductPage: NextPage<ProductPageProps> = ({ product }) => {
   const { addToCart } = useShop();
 
   return (
@@ -132,7 +130,9 @@ interface IParams extends ParsedUrlQuery {
   id: string;
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps<ProductPageProps> = async (
+  context
+) => {
   const { id } = context.params as IParams;
 
   const product = productsData.find((product) => product.id === Number(id));

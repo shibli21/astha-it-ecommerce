@@ -3,7 +3,7 @@ import { ChangeEvent, FC, FormEvent, useState } from "react";
 import useShop from "../context/ShopContext";
 
 const CheckoutForm: FC = () => {
-  const { checkout } = useShop();
+  const { checkout, orders } = useShop();
   const router = useRouter();
   const [errors, setErrors] = useState<any>({});
   const [touched, setTouched] = useState<any>({});
@@ -90,7 +90,9 @@ const CheckoutForm: FC = () => {
     e.preventDefault();
 
     if (validateForm()) {
-      router.push("/orders").then(() => checkout(checkoutForm));
+      router
+        .push("/orders/" + orders[orders.length - 1].id)
+        .then(() => checkout(checkoutForm));
     }
   };
 

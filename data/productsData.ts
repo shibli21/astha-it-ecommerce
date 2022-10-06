@@ -31,7 +31,7 @@ export const productsData: Product[] = [
       "https://api.lorem.space/image/shoes?w=640&h=480&r=6841",
       "https://api.lorem.space/image/shoes?w=640&h=480&r=1122",
     ],
-    stock: 1,
+    stock: 9,
   },
   {
     id: 95,
@@ -49,7 +49,7 @@ export const productsData: Product[] = [
       "https://api.lorem.space/image/furniture?w=640&h=480&r=2694",
       "https://api.lorem.space/image/furniture?w=640&h=480&r=9831",
     ],
-    stock: 1,
+    stock: 21,
   },
   {
     id: 96,
@@ -138,7 +138,7 @@ export const productsData: Product[] = [
       "https://api.lorem.space/image/fashion?w=640&h=480&r=5333",
       "https://api.lorem.space/image/fashion?w=640&h=480&r=7739",
     ],
-    stock: 12,
+    stock: 0,
   },
   {
     id: 101,

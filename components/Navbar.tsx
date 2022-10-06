@@ -17,49 +17,43 @@ export default function Navbar({}: Props) {
     window.addEventListener("resize", () => setOpenNav(false));
   }, []);
 
+  const NAV_LINKS = [
+    {
+      name: "Products",
+      href: "/",
+    },
+    {
+      name: "Contact",
+      href: "/",
+    },
+    {
+      name: "About",
+      href: "/",
+    },
+  ];
+
   return (
     <>
       <div className="sticky top-0 z-30 -mx-4 bg-white px-4">
         <header className="flex items-center justify-between  py-4">
-          <Link href="/">
-            <Image
-              priority
-              width={100}
-              height={26}
-              className="h-auto max-w-full cursor-pointer"
-              src="/logo-astha.svg"
-              alt="asthait-logo"
-            />
-          </Link>
+          <Logo />
 
           <nav className="hidden gap-12 md:flex">
-            <Link href="/" passHref>
-              <a className=" text-lg font-medium transition duration-100 hover:text-purple-500 active:text-purple-700">
-                Our Products
-              </a>
-            </Link>
-
-            <Link href="/" passHref>
-              <a className=" text-lg font-medium transition duration-100 hover:text-purple-500 active:text-purple-700">
-                Contact
-              </a>
-            </Link>
-
-            <Link href="/" passHref>
-              <a className=" text-lg font-medium transition duration-100 hover:text-purple-500 active:text-purple-700">
-                About
-              </a>
-            </Link>
+            {NAV_LINKS.map((link) => (
+              <Link href={link.href} key={link.name} passHref>
+                <a className="text-lg font-medium transition duration-100 hover:text-purple-500 active:text-purple-700">
+                  {link.name}
+                </a>
+              </Link>
+            ))}
           </nav>
 
           <div className="-ml-8 hidden flex-col gap-2.5 sm:flex-row sm:justify-center md:flex lg:justify-start">
             <CartIcon />
-            <Link href="/orders">
-              <Checklist
-                className="m-2 cursor-pointer"
-                strokeWidth={2}
-                color={"black"}
-              />
+            <Link href="/orders" passHref>
+              <a>
+                <Checklist className="m-2 hover:text-purple-700" />
+              </a>
             </Link>
           </div>
           <button
@@ -75,41 +69,22 @@ export default function Navbar({}: Props) {
           className="s flex h-full flex-col items-center space-y-6 px-2"
           onClick={() => setOpenNav(false)}
         >
-          <Link href="/">
-            <Image
-              priority
-              width={100}
-              height={26}
-              className="mt-4 h-auto max-w-full cursor-pointer"
-              src="/logo-astha.svg"
-              alt="asthait-logo"
-            />
-          </Link>
-          <Link href="/">
-            <a className=" text-lg font-medium transition duration-100 hover:text-purple-600 active:text-purple-700">
-              Our Products
-            </a>
-          </Link>
-
-          <Link href="/">
-            <a className=" text-lg font-medium transition duration-100 hover:text-purple-600 active:text-purple-700">
-              Contact
-            </a>
-          </Link>
-
-          <Link href="/">
-            <a className=" text-lg font-medium transition duration-100 hover:text-purple-600 active:text-purple-700">
-              About
-            </a>
-          </Link>
+          <div className="mt-4">
+            <Logo />
+          </div>
+          {NAV_LINKS.map((link) => (
+            <Link href={link.href} key={link.name} passHref>
+              <a className="text-lg font-medium transition duration-100 hover:text-purple-500 active:text-purple-700">
+                {link.name}
+              </a>
+            </Link>
+          ))}
           <div className="flex gap-2">
             <CartIcon />
-            <Link href="/orders">
-              <Checklist
-                className="m-2 cursor-pointer"
-                strokeWidth={2}
-                color={"black"}
-              />
+            <Link href="/orders" passHref>
+              <a>
+                <Checklist className="m-2 hover:text-purple-700" />
+              </a>
             </Link>
           </div>
         </div>
@@ -123,13 +98,30 @@ const CartIcon: FC = () => {
   return (
     <Link href="/cart">
       <div className="relative inline-flex cursor-pointer items-center p-2 text-center text-sm">
-        <ShoppingCart strokeWidth={2} color="black" />
+        <ShoppingCart className="hover:text-purple-700" />
         {totalCartQuantity > 0 && (
           <div className="absolute -top-2 -right-2 inline-flex h-6 w-6 items-center justify-center rounded-full border-2 border-white bg-purple-500 text-xs font-bold text-white ">
             {totalCartQuantity}
           </div>
         )}
       </div>
+    </Link>
+  );
+};
+
+const Logo = () => {
+  return (
+    <Link href="/" passHref>
+      <a>
+        <Image
+          priority
+          width={100}
+          height={26}
+          className="h-auto max-w-full cursor-pointer"
+          src="/logo-astha.svg"
+          alt="asthait-logo"
+        />
+      </a>
     </Link>
   );
 };

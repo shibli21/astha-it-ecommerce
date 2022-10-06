@@ -24,8 +24,8 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
   }
 
   return (
-    <div>
-      <div className="border border-gray-900">
+    <>
+      <div className="h-full border border-gray-900">
         <div className="relative">
           <button type="button" className="absolute right-4 top-4">
             <Eye onClick={openModal} />
@@ -38,28 +38,30 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
             <Link
               className="text-lg font-bold leading-4"
               href={`/products/${encodeURIComponent(id)}`}
+              passHref
             >
-              <Image
-                width={300}
-                height={300}
-                className="h-56 w-full cursor-pointer object-cover lg:h-72 "
-                alt={title}
-                src={images[0]}
-              />
+              <a>
+                <Image
+                  width={300}
+                  height={300}
+                  className="h-56 w-full cursor-pointer object-cover lg:h-72 "
+                  alt={title}
+                  src={images[0]}
+                />
+              </a>
             </Link>
           </div>
         </div>
 
         <div className="max-h-full space-y-2 p-6">
-          <Link
-            href={`/products/${encodeURIComponent(id)}`}
-            className=" text-lg font-bold leading-4"
-          >
-            {title}
+          <Link href={`/products/${encodeURIComponent(id)}`}>
+            <p className="cursor-pointer pb-2 text-lg font-medium leading-4 hover:text-purple-700 ">
+              {title}
+            </p>
           </Link>
 
           <div className="flex justify-between text-sm">
-            <p className=" text-gray-700">${price}</p>
+            <p className="text-gray-700 ">${price}</p>
             <div>
               {stock > 0 ? (
                 <div className="flex items-center space-x-2">
@@ -80,7 +82,7 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
           <button
             onClick={() => addToCart(product)}
             type="button"
-            className="block w-full bg-gray-900 px-4 py-2 text-sm font-bold text-white"
+            className="btn w-full"
           >
             Add to Cart
           </button>
@@ -156,7 +158,7 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
           </div>
         </Dialog>
       </Transition>
-    </div>
+    </>
   );
 };
 

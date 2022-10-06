@@ -1,4 +1,4 @@
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import ProductsList from "../components/ProductsList";
 import { productsData } from "../data/productsData";
@@ -8,9 +8,7 @@ interface HomePageProps {
   products: Product[];
 }
 
-const Home: InferGetStaticPropsType<typeof getStaticProps> = ({
-  products,
-}: HomePageProps) => {
+const Home: NextPage<HomePageProps> = ({ products }) => {
   return (
     <>
       <Head>
@@ -28,7 +26,7 @@ const Home: InferGetStaticPropsType<typeof getStaticProps> = ({
 
 export default Home;
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
   const products = productsData;
 
   return {

@@ -63,8 +63,8 @@ const OrderPage: NextPage = () => {
                       <td className="p-2 text-gray-500">
                         <h1>${item.totalCost.toFixed(2)}</h1>
                       </td>
-                      <td className="p-2">
-                        <div className="bg-green-500 px-2 py-0.5 text-center text-white shadow-md">
+                      <td className="rounded p-2">
+                        <div className="bg-emerald-500 p-0.5 text-center text-xs font-semibold uppercase text-white shadow-md">
                           Paid
                         </div>
                       </td>
