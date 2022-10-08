@@ -90,9 +90,7 @@ const CheckoutForm: FC = () => {
     e.preventDefault();
 
     if (validateForm()) {
-      router
-        .push("/orders/" + orders[orders.length - 1].id)
-        .then(() => checkout(checkoutForm));
+      router.push("/orders/").then(() => checkout(checkoutForm));
     }
   };
 
